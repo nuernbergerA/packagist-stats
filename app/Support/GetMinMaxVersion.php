@@ -1,26 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace App\Support;
 
 use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Semver\VersionParser;
-use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class GetMinMaxVersion
 {
-    /**
-     * A basic test example.
-     */
-    public function test_that_true_is_true(): void
+    public function __invoke(string $versionConstraint): array
     {
-        $version = '>=7.2';
-
-
-// $version = '^8.1 || ^8.2 || ^8.3 || ^8.4';
-
         $parser = new VersionParser;
-
-        $constraint = $parser->parseConstraints($version);
+        $constraint = $parser->parseConstraints($versionConstraint);
 
         $supportedVersion = collect([
             '5.3',
@@ -43,6 +33,7 @@ class ExampleTest extends TestCase
             ])
             ->filter(fn(ConstraintInterface $version) => $constraint->matches($version))
             ->keys();
-        dump([$supportedVersion->min(), $supportedVersion->max()]);
+
+        return [$supportedVersion->min(), $supportedVersion->max()];
     }
 }
