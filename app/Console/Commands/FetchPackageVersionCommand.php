@@ -17,10 +17,7 @@ class FetchPackageVersionCommand extends Command
     public function handle(): int
     {
         Package::query()
-        ->where('id', '>', 377)
-        ->each(function (Package $package) {
-            $this->processPackage($package);
-        }, 10);
+            ->each($this->processPackage(...), 10);
 
         return self::SUCCESS;
     }
