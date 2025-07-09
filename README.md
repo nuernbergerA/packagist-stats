@@ -1,1 +1,1 @@
-[Tempest version]([https://laravel.com/docs](https://github.com/brendt/packagist-stats-parser))
+[Tempest version](https://github.com/brendt/packagist-stats-parser)
